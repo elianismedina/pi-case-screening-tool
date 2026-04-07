@@ -25,16 +25,18 @@ export function FormHeader({ currentStep, setCurrentStep, resetForm }: FormHeade
           </CardDescription>
         </div>
         <div className="flex flex-col items-end gap-2">
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            onClick={resetForm}
-            className="h-8 gap-2 text-zinc-500 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-400"
-          >
-            <RotateCcw className="h-3.5 w-3.5" />
-            <span className="text-xs font-semibold uppercase tracking-wider">New Evaluation</span>
-          </Button>
+          {currentStep === steps.length && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={resetForm}
+              className="h-8 gap-2 text-zinc-500 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-400"
+            >
+              <RotateCcw className="h-3.5 w-3.5" />
+              <span className="text-xs font-semibold uppercase tracking-wider">New Evaluation</span>
+            </Button>
+          )}
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
               Step {currentStep} of {steps.length}

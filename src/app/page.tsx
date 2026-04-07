@@ -1,4 +1,5 @@
 import { CaseScreeningForm } from "@/components/CaseScreeningForm"
+import { ModeToggle } from "@/components/ModeToggle"
 import { Shield, Clock, HardHat, FileCheck } from "lucide-react"
 
 export default function Home() {
@@ -11,9 +12,12 @@ export default function Home() {
       <main className="container relative z-10 mx-auto flex flex-col items-center justify-center space-y-12 px-4 py-16 lg:py-24">
         {/* Hero Section */}
         <div className="flex flex-col items-center space-y-6 text-center">
-          <div className="flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-4 py-1 text-sm font-medium text-blue-600 backdrop-blur-md dark:border-blue-900/50 dark:bg-blue-950/20 dark:text-blue-400">
-            <Shield className="h-4 w-4" />
-            <span>Trusted Case Screening</span>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-4 py-1 text-sm font-medium text-blue-600 backdrop-blur-md dark:border-blue-900/50 dark:bg-blue-950/20 dark:text-blue-400">
+              <Shield className="h-4 w-4" />
+              <span>Trusted Case Screening</span>
+            </div>
+            <ModeToggle />
           </div>
           <h1 className="max-w-3xl text-4xl font-extrabold tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl dark:text-zinc-50">
             Personal Injury Case <span className="bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-indigo-400">Screening Tool</span>
@@ -34,11 +38,6 @@ export default function Home() {
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
             © {new Date().getFullYear()} PI Screening Tool. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-400">
-            <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400">Privacy Policy</a>
-            <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400">Terms of Service</a>
-            <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400">Contact Us</a>
-          </div>
         </div>
       </footer>
     </div>
