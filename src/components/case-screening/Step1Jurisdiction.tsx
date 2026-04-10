@@ -31,9 +31,10 @@ import { states, FormValues } from "./constants"
 
 export function Step1Jurisdiction() {
   const { control } = useFormContext<FormValues>()
+  const [isCalendarOpen, setIsCalendarOpen] = React.useState(false)
 
   return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-left-4 duration-300">
+    <div className="space-y-6 pb-10 animate-in fade-in slide-in-from-left-4 duration-300">
       <div className="flex items-center gap-3 rounded-lg bg-blue-50 p-4 dark:bg-blue-950/30">
         <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400" />
         <div>
@@ -46,81 +47,86 @@ export function Step1Jurisdiction() {
         </div>
       </div>
 
-      <FormField
-        control={control}
-        name="state"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-              State of Incident
-            </FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger className="h-12 border-zinc-200 bg-white/50 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950/50">
-                  <SelectValue placeholder="Select the state" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {states.map((s) => (
-                  <SelectItem key={s} value={s}>
-                    {s}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={control}
-        name="date"
-        render={({ field }) => (
-          <FormItem className="flex flex-col">
-            <FormLabel className="flex items-center gap-2">
-              <CalendarLucide className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-              Date of Incident
-            </FormLabel>
-            <Popover>
-              <PopoverTrigger asChild>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <FormField
+          control={control}
+          name="state"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                State of Incident
+              </FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "h-12 w-full justify-start text-left font-normal border-zinc-200 bg-white/50 hover:bg-white dark:border-zinc-800 dark:bg-zinc-950/50 dark:hover:bg-zinc-900",
-                      !field.value && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4 opacity-50" />
-                    {field.value ? (
-                      format(field.value, "PPP")
-                    ) : (
-                      <span>Pick a date</span>
-                    )}
-                  </Button>
+                  <SelectTrigger className="h-12 w-full border-zinc-200 bg-white/50 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950/50">
+                    <SelectValue placeholder="Select the state" />
+                  </SelectTrigger>
                 </FormControl>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={field.value}
-                  onSelect={field.onChange}
-                  disabled={(date) =>
-                    date > new Date() || date < new Date("1900-01-01")
-                  }
-                  captionLayout="dropdown"
-                  startMonth={new Date(1900, 0)}
-                  endMonth={new Date()}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+                <SelectContent>
+                  {states.map((s) => (
+                    <SelectItem key={s} value={s}>
+                      {s}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="date"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel className="flex items-center gap-2">
+                <CalendarLucide className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                Date of Incident
+              </FormLabel>
+              <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "h-12 w-full justify-start text-left font-normal border-zinc-200 bg-white/50 hover:bg-white dark:border-zinc-800 dark:bg-zinc-950/50 dark:hover:bg-zinc-900",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4 opacity-50" />
+                      {field.value ? (
+                        format(field.value, "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={(date) => {
+                      field.onChange(date)
+                      setIsCalendarOpen(false)
+                    }}
+                    disabled={(date) =>
+                      date > new Date() || date < new Date("1900-01-01")
+                    }
+                    captionLayout="dropdown"
+                    startMonth={new Date(1900, 0)}
+                    endMonth={new Date()}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
     </div>
   )
 }
