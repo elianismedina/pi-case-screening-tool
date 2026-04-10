@@ -1,6 +1,6 @@
 import { CaseScreeningForm } from "@/components/CaseScreeningForm"
 import { ModeToggle } from "@/components/ModeToggle"
-import { Shield, Clock, HardHat, FileCheck } from "lucide-react"
+import { Shield } from "lucide-react"
 
 export default function Home() {
   return (

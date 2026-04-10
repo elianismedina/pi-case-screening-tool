@@ -20,6 +20,12 @@ import {
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import { FormValues } from "./constants"
 
 export function Step3AdditionalInformation() {
@@ -39,12 +45,16 @@ export function Step3AdditionalInformation() {
         </div>
       </div>
 
-      {/* Core Incident and Demographic Questions */}
-      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
-        <div className="flex items-center gap-2">
-          <MapPin className="h-5 w-5 text-purple-500" />
-          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Core Incident and Demographic Questions</h4>
-        </div>
+      <Accordion type="multiple" defaultValue={["core-incident"]} className="w-full space-y-4">
+        {/* Core Incident and Demographic Questions */}
+        <AccordionItem value="core-incident" className="border rounded-lg border-zinc-200 bg-zinc-50/50 px-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+          <AccordionTrigger className="hover:no-underline py-4">
+            <div className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-purple-500" />
+              <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Core Incident and Demographic Questions</h4>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="space-y-4 pb-4">
 
         <FormField
           control={control}
@@ -180,14 +190,18 @@ export function Step3AdditionalInformation() {
             </FormItem>
           )}
         />
-      </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Medical Evaluation and Injury Details */}
-      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
-        <div className="flex items-center gap-2">
-          <Heart className="h-5 w-5 text-red-500" />
-          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Medical Evaluation and Injury Details</h4>
-        </div>
+        {/* Medical Evaluation and Injury Details */}
+        <AccordionItem value="medical-evaluation" className="border rounded-lg border-zinc-200 bg-zinc-50/50 px-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+          <AccordionTrigger className="hover:no-underline py-4">
+            <div className="flex items-center gap-2">
+              <Heart className="h-5 w-5 text-red-500" />
+              <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Medical Evaluation and Injury Details</h4>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="space-y-4 pb-4">
 
         <FormField
           control={control}
@@ -365,14 +379,18 @@ export function Step3AdditionalInformation() {
             </FormItem>
           )}
         />
-      </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Employment and Economic Damages */}
-      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
-        <div className="flex items-center gap-2">
-          <Briefcase className="h-5 w-5 text-blue-500" />
-          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Employment and Economic Damages</h4>
-        </div>
+        {/* Employment and Economic Damages */}
+        <AccordionItem value="employment" className="border rounded-lg border-zinc-200 bg-zinc-50/50 px-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+          <AccordionTrigger className="hover:no-underline py-4">
+            <div className="flex items-center gap-2">
+              <Briefcase className="h-5 w-5 text-blue-500" />
+              <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Employment and Economic Damages</h4>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="space-y-4 pb-4">
 
         <FormField
           control={control}
@@ -426,7 +444,7 @@ export function Step3AdditionalInformation() {
           name="employment.employerName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>What is your employer's name?</FormLabel>
+              <FormLabel>What is your employer&apos;s name?</FormLabel>
               <FormControl>
                 <Input placeholder="Employer name" {...field} />
               </FormControl>
@@ -440,7 +458,7 @@ export function Step3AdditionalInformation() {
           name="employment.employerContact"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>What is your employer's contact information?</FormLabel>
+              <FormLabel>What is your employer&apos;s contact information?</FormLabel>
               <FormControl>
                 <Input placeholder="Phone number or email" {...field} />
               </FormControl>
@@ -499,14 +517,18 @@ export function Step3AdditionalInformation() {
             </FormItem>
           )}
         />
-      </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Insurance Coverage and Financial Pillars */}
-      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
-        <div className="flex items-center gap-2">
-          <Shield className="h-5 w-5 text-green-500" />
-          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Insurance Coverage and Financial Pillars</h4>
-        </div>
+        {/* Insurance Coverage and Financial Pillars */}
+        <AccordionItem value="insurance" className="border rounded-lg border-zinc-200 bg-zinc-50/50 px-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+          <AccordionTrigger className="hover:no-underline py-4">
+            <div className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-green-500" />
+              <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Insurance Coverage and Financial Pillars</h4>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="space-y-4 pb-4">
 
         <FormField
           control={control}
@@ -536,7 +558,7 @@ export function Step3AdditionalInformation() {
           name="insuranceCoverage.atFaultInsuranceCompany"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>What is the name of the at-fault party's insurance company?</FormLabel>
+              <FormLabel>What is the name of the at-fault party&apos;s insurance company?</FormLabel>
               <FormControl>
                 <Input placeholder="Insurance company name" {...field} />
               </FormControl>
@@ -738,14 +760,18 @@ export function Step3AdditionalInformation() {
             </FormItem>
           )}
         />
-      </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Liability Assessment and History */}
-      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
-        <div className="flex items-center gap-2">
-          <AlertCircle className="h-5 w-5 text-amber-500" />
-          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Liability Assessment and History</h4>
-        </div>
+        {/* Liability Assessment and History */}
+        <AccordionItem value="liability" className="border rounded-lg border-zinc-200 bg-zinc-50/50 px-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+          <AccordionTrigger className="hover:no-underline py-4">
+            <div className="flex items-center gap-2">
+              <AlertCircle className="h-5 w-5 text-amber-500" />
+              <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Liability Assessment and History</h4>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="space-y-4 pb-4">
 
         <FormField
           control={control}
@@ -985,16 +1011,18 @@ export function Step3AdditionalInformation() {
             )}
           />
         </div>
-      </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* AI Decision (Optional) */}
-      <div className="space-y-4 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/30">
-        <div className="flex items-center gap-2">
-          <FileText className="h-5 w-5 text-blue-500" />
-          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">
-            AI Decision (Optional)
-          </h4>
-        </div>
+        {/* AI Decision (Optional) */}
+        <AccordionItem value="ai-decision" className="border rounded-lg border-blue-200 bg-blue-50/50 px-4 dark:border-blue-800 dark:bg-blue-950/30">
+          <AccordionTrigger className="hover:no-underline py-4">
+            <div className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-blue-500" />
+              <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">AI Decision (Optional)</h4>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="space-y-4 pb-4">
         <p className="text-sm text-zinc-600 dark:text-zinc-400">
           Paste the decision from your AI analysis here to include it in the final report.
         </p>
@@ -1039,7 +1067,9 @@ export function Step3AdditionalInformation() {
             </FormItem>
           )}
         />
-      </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   )
 }
