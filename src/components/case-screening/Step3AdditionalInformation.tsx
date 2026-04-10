@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Shield, Heart, AlertCircle } from "lucide-react"
+import { Shield, Heart, AlertCircle, MapPin, Briefcase, FileText, Phone } from "lucide-react"
 import { useFormContext } from "react-hook-form"
 
 import {
@@ -39,100 +39,19 @@ export function Step3AdditionalInformation() {
         </div>
       </div>
 
-      {/* Medical Treatment Section */}
+      {/* Core Incident and Demographic Questions */}
       <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
         <div className="flex items-center gap-2">
-          <Heart className="h-5 w-5 text-red-500" />
-          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Medical Treatment</h4>
+          <MapPin className="h-5 w-5 text-purple-500" />
+          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Core Incident and Demographic Questions</h4>
         </div>
 
         <FormField
           control={control}
-          name="medicalTreatment.sought"
+          name="coreIncident.exactDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Did you seek medical treatment?</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select an option" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="yes">Yes</SelectItem>
-                  <SelectItem value="no">No</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={control}
-          name="medicalTreatment.provider"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Healthcare Provider (if applicable)</FormLabel>
-              <FormControl>
-                <Input placeholder="Hospital, clinic, or doctor's name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={control}
-          name="medicalTreatment.diagnosis"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Diagnosis (if applicable)</FormLabel>
-              <FormControl>
-                <Input placeholder="Brief description of diagnosis" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={control}
-          name="medicalTreatment.ongoing"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Is treatment ongoing?</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select an option" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="yes">Yes</SelectItem>
-                  <SelectItem value="no">No</SelectItem>
-                  <SelectItem value="unsure">Unsure</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
-      {/* Insurance Coverage Section */}
-      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
-        <div className="flex items-center gap-2">
-          <Shield className="h-5 w-5 text-blue-500" />
-          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Insurance Coverage</h4>
-        </div>
-
-        <FormField
-          control={control}
-          name="insuranceCoverage.hasInsurance"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Do you have insurance coverage?</FormLabel>
+              <FormLabel>Do you remember the exact date?</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -152,12 +71,12 @@ export function Step3AdditionalInformation() {
 
         <FormField
           control={control}
-          name="insuranceCoverage.provider"
+          name="coreIncident.location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Insurance Provider (if applicable)</FormLabel>
+              <FormLabel>Where specifically did this happen (intersection or address)?</FormLabel>
               <FormControl>
-                <Input placeholder="Insurance company name" {...field} />
+                <Input placeholder="Intersection or address" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -166,12 +85,12 @@ export function Step3AdditionalInformation() {
 
         <FormField
           control={control}
-          name="insuranceCoverage.policyNumber"
+          name="coreIncident.city"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Policy Number (if applicable)</FormLabel>
+              <FormLabel>What city did it occur in?</FormLabel>
               <FormControl>
-                <Input placeholder="Your policy number" {...field} />
+                <Input placeholder="City name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -180,32 +99,10 @@ export function Step3AdditionalInformation() {
 
         <FormField
           control={control}
-          name="insuranceCoverage.coverageType"
+          name="coreIncident.atFaultPartyKnown"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Type of Coverage (if applicable)</FormLabel>
-              <FormControl>
-                <Input placeholder="e.g., Auto, Health, Homeowners" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
-      {/* Liability Section */}
-      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
-        <div className="flex items-center gap-2">
-          <AlertCircle className="h-5 w-5 text-amber-500" />
-          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Liability Assessment</h4>
-        </div>
-
-        <FormField
-          control={control}
-          name="liability.clearLiability"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Is liability clear?</FormLabel>
+              <FormLabel>Do you know who caused this?</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -213,8 +110,8 @@ export function Step3AdditionalInformation() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="yes">Yes, liability is clear</SelectItem>
-                  <SelectItem value="no">No, liability is disputed</SelectItem>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
                   <SelectItem value="unsure">Unsure</SelectItem>
                 </SelectContent>
               </Select>
@@ -225,12 +122,12 @@ export function Step3AdditionalInformation() {
 
         <FormField
           control={control}
-          name="liability.atFaultParty"
+          name="coreIncident.atFaultPartyInfo"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Who is at fault? (if known)</FormLabel>
+              <FormLabel>Do you have their name or any contact information?</FormLabel>
               <FormControl>
-                <Input placeholder="Describe the at-fault party" {...field} />
+                <Input placeholder="Name or contact information" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -239,29 +136,7 @@ export function Step3AdditionalInformation() {
 
         <FormField
           control={control}
-          name="liability.witnesses"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Are there witnesses?</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select an option" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="yes">Yes</SelectItem>
-                  <SelectItem value="no">No</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={control}
-          name="liability.policeReport"
+          name="coreIncident.policeReportFiled"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Was a police report filed?</FormLabel>
@@ -284,10 +159,330 @@ export function Step3AdditionalInformation() {
 
         <FormField
           control={control}
-          name="liability.governmentInvolvement"
+          name="coreIncident.reportedToPropertyManager"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Is a government entity involved in the accident?</FormLabel>
+              <FormLabel>Did you report this to a property manager or animal control (if applicable)?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="not_applicable">Not Applicable</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+
+      {/* Medical Evaluation and Injury Details */}
+      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+        <div className="flex items-center gap-2">
+          <Heart className="h-5 w-5 text-red-500" />
+          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Medical Evaluation and Injury Details</h4>
+        </div>
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.bodyPartsInjured"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What parts of your body were injured?</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Describe the injured body parts" className="min-h-[80px] resize-none" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.currentSymptoms"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Can you describe your current physical, cognitive, and emotional symptoms?</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Describe your symptoms" className="min-h-[80px] resize-none" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.firstDoctorVisit"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Have you seen a doctor, and when was your first visit?</FormLabel>
+              <FormControl>
+                <Input placeholder="Date of first doctor visit" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.transportedByAmbulance"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Were you transported from the scene by ambulance?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.treatmentReceived"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What medical treatment have you received so far (ER, Urgent Care, etc.)?</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Describe the treatment received" className="min-h-[80px] resize-none" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.stillReceivingTreatment"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Are you still receiving medical treatment?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.surgeryCompleted"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Has surgery related to the accident been completed or is it recommended?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes, completed</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="recommended">Recommended</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.priorMedicalConditions"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Before this accident, did you have any medical conditions, prior injuries, or prior accidents?</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Describe any prior conditions or injuries" className="min-h-[80px] resize-none" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.activelyTreatingCondition"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Were you actively treating for any condition at the time of the accident?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="medicalEvaluation.currentMedications"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What medications or supplements are you currently taking?</FormLabel>
+              <FormControl>
+                <Textarea placeholder="List current medications and supplements" className="min-h-[80px] resize-none" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+
+      {/* Employment and Economic Damages */}
+      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+        <div className="flex items-center gap-2">
+          <Briefcase className="h-5 w-5 text-blue-500" />
+          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Employment and Economic Damages</h4>
+        </div>
+
+        <FormField
+          control={control}
+          name="employment.missedWork"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Have you missed any work because of these injuries?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="employment.currentlyAbleToWork"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Are you currently able to work, or are you limited in your duties?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes, able to work</SelectItem>
+                  <SelectItem value="no">No, unable to work</SelectItem>
+                  <SelectItem value="limited">Limited in duties</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="employment.employerName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is your employer's name?</FormLabel>
+              <FormControl>
+                <Input placeholder="Employer name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="employment.employerContact"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is your employer's contact information?</FormLabel>
+              <FormControl>
+                <Input placeholder="Phone number or email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="employment.hourlyRate"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is your hourly rate?</FormLabel>
+              <FormControl>
+                <Input placeholder="Hourly rate" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="employment.annualSalary"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is your annual salary?</FormLabel>
+              <FormControl>
+                <Input placeholder="Annual salary" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="employment.longTermWorkImpact"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Do you believe the injury will affect your ability to work long-term?</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -306,10 +501,496 @@ export function Step3AdditionalInformation() {
         />
       </div>
 
-      {/* AI Decision Input (Optional) */}
+      {/* Insurance Coverage and Financial Pillars */}
+      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+        <div className="flex items-center gap-2">
+          <Shield className="h-5 w-5 text-green-500" />
+          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Insurance Coverage and Financial Pillars</h4>
+        </div>
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.otherPartyHasInsurance"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Do you know if the other party has insurance?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.atFaultInsuranceCompany"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is the name of the at-fault party's insurance company?</FormLabel>
+              <FormControl>
+                <Input placeholder="Insurance company name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.ownAutoInsuranceCompany"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is your own auto insurance company?</FormLabel>
+              <FormControl>
+                <Input placeholder="Your auto insurance company" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.ownPolicyNumber"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is your policy number?</FormLabel>
+              <FormControl>
+                <Input placeholder="Your policy number" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.hasUMCoverage"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Do you have Uninsured Motorist (UM) coverage?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.hasUIMCoverage"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Do you have Underinsured Motorist (UIM) coverage?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.hasMedPayOrPIP"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Do you have MedPay or PIP coverage?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.pipDeductible"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>(For Florida callers) What is your PIP deductible?</FormLabel>
+              <FormControl>
+                <Input placeholder="PIP deductible amount" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.otherHouseholdVehicles"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Are there other vehicles in your household with insurance?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.hasHealthInsurance"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Do you have health insurance?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.healthInsuranceType"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What type of health insurance do you have?</FormLabel>
+              <FormControl>
+                <Input placeholder="Private, Medicare, Medicaid, etc." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="insuranceCoverage.workingAtTimeOfAccident"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Were you working at the time of the accident?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+
+      {/* Liability Assessment and History */}
+      <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+        <div className="flex items-center gap-2">
+          <AlertCircle className="h-5 w-5 text-amber-500" />
+          <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Liability Assessment and History</h4>
+        </div>
+
+        <FormField
+          control={control}
+          name="liability.vehicleYear"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is the year of the vehicle involved?</FormLabel>
+              <FormControl>
+                <Input placeholder="Vehicle year" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.vehicleMake"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is the make of the vehicle involved?</FormLabel>
+              <FormControl>
+                <Input placeholder="Vehicle make" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.vehicleModel"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is the model of the vehicle involved?</FormLabel>
+              <FormControl>
+                <Input placeholder="Vehicle model" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.vehicleMileage"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What is the mileage of the vehicle involved?</FormLabel>
+              <FormControl>
+                <Input placeholder="Vehicle mileage" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.vehicleDrivable"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Is the vehicle drivable?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.vehicleLocation"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Where is the vehicle currently located?</FormLabel>
+              <FormControl>
+                <Input placeholder="Vehicle location" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.wearingSeatbelt"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Were you wearing your seatbelt at the time of the accident?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.distractedAtTime"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Were you doing anything at the time that the other side might bring up (e.g., using a phone, eating, or drinking)?</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Describe any activities" className="min-h-[80px] resize-none" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.faultAdmissions"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Did anyone at the scene say anything about whose fault it was?</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Describe any admissions made" className="min-h-[80px] resize-none" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.priorAccidents"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Have you ever been in an accident before and made a claim?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="liability.priorAttorneyConsulted"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Have you ever spoken with or hired any other attorney about this specific case?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="unsure">Unsure</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="space-y-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/50">
+          <div className="flex items-center gap-2">
+            <Phone className="h-5 w-5 text-indigo-500" />
+            <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">Contact Information</h4>
+          </div>
+
+          <FormField
+            control={control}
+            name="liability.bestContactNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>What is the best phone number to reach you?</FormLabel>
+                <FormControl>
+                  <Input placeholder="Phone number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="liability.bestContactEmail"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>What is the best email address to reach you?</FormLabel>
+                <FormControl>
+                  <Input placeholder="Email address" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="liability.bestContactTime"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>What is the best time to reach you?</FormLabel>
+                <FormControl>
+                  <Input placeholder="Best time to contact" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+      </div>
+
+      {/* AI Decision (Optional) */}
       <div className="space-y-4 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/30">
         <div className="flex items-center gap-2">
-          <AlertCircle className="h-5 w-5 text-blue-500" />
+          <FileText className="h-5 w-5 text-blue-500" />
           <h4 className="font-semibold text-zinc-900 dark:text-zinc-50">
             AI Decision (Optional)
           </h4>

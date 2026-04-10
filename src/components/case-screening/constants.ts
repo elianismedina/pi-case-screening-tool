@@ -24,27 +24,74 @@ export const formSchema = z.object({
     message: "Please provide at least 50 characters of detail.",
   }),
 
-  // Step 3: Dynamic Questions
-  medicalTreatment: z.object({
-    sought: z.enum(["yes", "no"], { required_error: "Please select an option" }),
-    provider: z.string().optional(),
-    diagnosis: z.string().optional(),
-    ongoing: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+  // Step 3: Additional Questions - Core Incident and Demographic Questions
+  coreIncident: z.object({
+    exactDate: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    location: z.string().optional(),
+    city: z.string().optional(),
+    atFaultPartyKnown: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    atFaultPartyInfo: z.string().optional(),
+    policeReportFiled: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    reportedToPropertyManager: z.enum(["yes", "no", "not_applicable", "unsure"], { required_error: "Please select an option" }),
   }),
 
+  // Medical Evaluation and Injury Details
+  medicalEvaluation: z.object({
+    bodyPartsInjured: z.string().optional(),
+    currentSymptoms: z.string().optional(),
+    firstDoctorVisit: z.string().optional(),
+    transportedByAmbulance: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    treatmentReceived: z.string().optional(),
+    stillReceivingTreatment: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    surgeryCompleted: z.enum(["yes", "no", "recommended", "unsure"], { required_error: "Please select an option" }),
+    priorMedicalConditions: z.string().optional(),
+    activelyTreatingCondition: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    currentMedications: z.string().optional(),
+  }),
+
+  // Employment and Economic Damages
+  employment: z.object({
+    missedWork: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    currentlyAbleToWork: z.enum(["yes", "no", "limited", "unsure"], { required_error: "Please select an option" }),
+    employerName: z.string().optional(),
+    employerContact: z.string().optional(),
+    hourlyRate: z.string().optional(),
+    annualSalary: z.string().optional(),
+    longTermWorkImpact: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+  }),
+
+  // Insurance Coverage and Financial Pillars
   insuranceCoverage: z.object({
-    hasInsurance: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
-    provider: z.string().optional(),
-    policyNumber: z.string().optional(),
-    coverageType: z.string().optional(),
+    otherPartyHasInsurance: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    atFaultInsuranceCompany: z.string().optional(),
+    ownAutoInsuranceCompany: z.string().optional(),
+    ownPolicyNumber: z.string().optional(),
+    hasUMCoverage: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    hasUIMCoverage: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    hasMedPayOrPIP: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    pipDeductible: z.string().optional(),
+    otherHouseholdVehicles: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    hasHealthInsurance: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    healthInsuranceType: z.string().optional(),
+    workingAtTimeOfAccident: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
   }),
 
+  // Liability Assessment and History
   liability: z.object({
-    clearLiability: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
-    atFaultParty: z.string().optional(),
-    witnesses: z.enum(["yes", "no"], { required_error: "Please select an option" }),
-    policeReport: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
-    governmentInvolvement: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    vehicleYear: z.string().optional(),
+    vehicleMake: z.string().optional(),
+    vehicleModel: z.string().optional(),
+    vehicleMileage: z.string().optional(),
+    vehicleDrivable: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    vehicleLocation: z.string().optional(),
+    wearingSeatbelt: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    distractedAtTime: z.string().optional(),
+    faultAdmissions: z.string().optional(),
+    priorAccidents: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    priorAttorneyConsulted: z.enum(["yes", "no", "unsure"], { required_error: "Please select an option" }),
+    bestContactNumber: z.string().optional(),
+    bestContactEmail: z.string().optional(),
+    bestContactTime: z.string().optional(),
   }),
 
   // AI Decision (optional, for pasting back)
