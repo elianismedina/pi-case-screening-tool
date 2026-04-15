@@ -1024,7 +1024,7 @@ export function Step3AdditionalInformation() {
           </AccordionTrigger>
           <AccordionContent className="space-y-4 pb-4">
         <p className="text-sm text-zinc-600 dark:text-zinc-400">
-          Paste the decision from your AI analysis here to include it in the final report.
+          Paste the decision from your AI analysis here, covering the 5 pillars (Liability, Injuries, SOL, Insurance, and Damages) to include it in the final report.
         </p>
 
         <FormField
@@ -1058,7 +1058,7 @@ export function Step3AdditionalInformation() {
               <FormLabel>Justification</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Paste the 3-paragraph justification here..."
+                  placeholder="Paste the 3-paragraph justification (following the 5 pillars: Liability, Injuries, SOL, Insurance, and Damages) here..."
                   className="min-h-[100px] resize-none"
                   {...field}
                 />

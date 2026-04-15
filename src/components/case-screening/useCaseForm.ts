@@ -194,7 +194,7 @@ Prior Attorney Consulted: ${values.liability?.priorAttorneyConsulted}
 
 Please provide:
 1. Decision (Accept/Decline/Escalate)
-2. A 3-paragraph justification for your decision`;
+2. A 3-paragraph justification for your decision, explaining the reasoning following the 5 pillars: Liability, Injuries, SOL, Insurance, and Damages.`;
 
     navigator.clipboard.writeText(prompt);
     setCopied(true);
