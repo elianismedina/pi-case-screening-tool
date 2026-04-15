@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import jsPDF from "jspdf";
 
 import { formSchema, FormValues, steps } from "./constants";
+import { CASE_TYPES } from "./casetypes";
 
 export function useCaseForm() {
   const [currentStep, setCurrentStep] = React.useState(1);
@@ -18,6 +19,9 @@ export function useCaseForm() {
     defaultValues: {
       state: "",
       date: undefined,
+      caseType: "",
+      caseCategory: "",
+      caseSubType: "",
       details: "",
       coreIncident: {
         exactDate: undefined,
@@ -99,7 +103,14 @@ export function useCaseForm() {
           !errors.date
         );
       case 2:
-        return (watchedValues.details?.length || 0) >= 50 && !errors.details;
+        return (
+          !!watchedValues.caseType &&
+          !!watchedValues.caseCategory &&
+          (watchedValues.details?.length || 0) >= 50 &&
+          !errors.caseType &&
+          !errors.caseCategory &&
+          !errors.details
+        );
       case 3:
         // For the final step, we check if at least the key insurance and liability questions are answered
         const coreValid = !!watchedValues.coreIncident?.exactDate && !errors.coreIncident;
@@ -127,12 +138,21 @@ export function useCaseForm() {
 
   const copyToClipboard = () => {
     const values = form.getValues();
+    const caseTypeLabel = CASE_TYPES.find(t => t.id === values.caseType)?.label || values.caseType;
+    const currentType = CASE_TYPES.find(t => t.id === values.caseType);
+    const categoryLabel = currentType?.categories.find(c => c.id === values.caseCategory)?.label || values.caseCategory;
+    const currentCategory = currentType?.categories.find(c => c.id === values.caseCategory);
+    const subTypeLabel = currentCategory?.subTypes?.find(s => s.id === values.caseSubType)?.label || values.caseSubType || "None";
+
     const prompt = `Review the following case against company policy:
 
 CASE INFORMATION:
 ================
 State: ${values.state}
 Date of Incident: ${values.date ? format(values.date, "PPP") : "Not specified"}
+Case Type: ${caseTypeLabel}
+Category: ${categoryLabel}
+Sub-type: ${subTypeLabel}
 Incident Details: ${values.details}
 
 CORE INCIDENT:
@@ -240,9 +260,19 @@ Please provide:
       }
     };
 
+    const caseTypeLabel = CASE_TYPES.find(t => t.id === values.caseType)?.label || values.caseType;
+    const currentType = CASE_TYPES.find(t => t.id === values.caseType);
+    const categoryLabel = currentType?.categories.find(c => c.id === values.caseCategory)?.label || values.caseCategory;
+    const currentCategory = currentType?.categories.find(c => c.id === values.caseCategory);
+    const subTypeLabel = currentCategory?.subTypes?.find(s => s.id === values.caseSubType)?.label || values.caseSubType || "None";
+
     addSection(
       "JURISDICTION & STATUTE OF LIMITATIONS",
       `State: ${values.state}\nDate of Incident: ${values.date ? format(values.date, "PPP") : "Not specified"}`,
+    );
+
+    addSection("CASE CLASSIFICATION", 
+      `Type: ${caseTypeLabel}\nCategory: ${categoryLabel}\nSub-type: ${subTypeLabel}`
     );
 
     addSection("INCIDENT DETAILS", values.details);

@@ -20,6 +20,13 @@ export const formSchema = z.object({
   }),
 
   // Step 2: Incident Details
+  caseType: z.string({
+    required_error: "Please select a case type.",
+  }),
+  caseCategory: z.string({
+    required_error: "Please select a category.",
+  }),
+  caseSubType: z.string().optional(),
   details: z.string().min(50, {
     message: "Please provide at least 50 characters of detail.",
   }),
